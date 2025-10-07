@@ -1,5 +1,14 @@
-import mongoose, { model, Schema } from 'mongoose';
-mongoose.connect("mongodb+srv://dev_nikhil:dev_nikhil28@cluster0.h2xpg.mongodb.net/BitsAndVolts");
+import mongoose, { model, Schema } from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 const UserSchema = new Schema({
     firstName: { type: String, required: true },
